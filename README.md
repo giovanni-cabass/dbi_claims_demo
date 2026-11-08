@@ -79,7 +79,7 @@ this is a live, open research direction, not a solved roadmap.
   methods described in §2 — Method A (the covariant Lagrangian) and Method B (the blind,
   equation-of-motion-first construction) — cross-checked against each other. This is the solved,
   closed part of the problem. This repository's `claims.json` currently holds only the entries
-  folded in from note 01, the one worked example shown here; the rest of the scalar sector is
+  folded in from note 01, the ledger's one worked example so far; the rest of the scalar sector is
   already verified and not yet folded into the ledger.
 - **Spin-1:** Method A redone from scratch under the stricter verification discipline described in
   §4; drafted and has passed its internal dual-review process, but not yet executed/promoted into
@@ -99,41 +99,12 @@ read as fluent and confident while quietly getting a sign, an index placement, o
 several legal forms of a metric applies in a given step wrong. This project hit that directly —
 an early attempt at the spin-1 extension carried exactly this kind of convention mismatch, which
 slipped through an initial pass and had to be caught and redone from scratch. That failure mode
-is the actual reason this workspace is built the way it is, not an afterthought added for show:
-
-- **Rule files** (`.claude/rules/*.mdc`) fix conventions project-wide, loaded automatically into
-  every session rather than trusted to memory: `tensor-calculus-conventions.mdc` (metric
-  signature, index notation, which of the three legal DBI-metric forms applies where),
-  `mathematica-general-rules.mdc` (script structure, deterministic seeding, the
-  run-then-read-the-log verification protocol), `latex-conventions.mdc`, `established-results.mdc`
-  (the claim-ledger law itself — trust/sourcing/correction rules), `matrix-cookbook-reference.mdc`,
-  `file-lifecycle-conventions.mdc` (how a result gets corrected or retired without destroying its
-  history), and `stepwise-task-execution.mdc` (the dual-review process below, as a rule rather
-  than an ad hoc habit).
-- **Specialized skills** (`.claude/skills/*`), each invoked only when its specific failure mode is
-  actually in play, not by default:
-  - *Verification methods:* `dimensional-analysis` ($\lambda$-scaling consistency),
-    `experimental-algebra` (numerical falsification of a symbolic identity by substituting random
-    test functions — a last resort when direct simplification is stuck), `llf-trick`
-    (local-Lorentz-frame shortcut for covariant derivatives), `scale-invariance` (the de
-    Sitter-invariance check for a Lagrangian density).
-  - *Domain-specific discipline:* `stueckelberg-discipline` (what the $t\to t+\pi$ substitution
-    does and doesn't touch), `dbi-embedding-scalar` (the $\phi/\kappa/\tilde g$ bookkeeping and the
-    curl-obstruction gate from §1 that forces the flat/sub-horizon limit).
-  - *The Method B toolchain* (§2): `ansatz-basis-enumeration`, `eom-invariance-imposition`,
-    `eom-crosscheck` — building, constraining, and cross-checking an equation-of-motion-level
-    ansatz with no Lagrangian ever written.
-  - *Multi-agent deliberation:* `method-search` and `research-council`, structured adversarial
-    debates (a champion proposes, independent referees attack, a synthesizer rules) used to decide
-    whether a candidate method is even worth pursuing before committing real derivation time to
-    it — this is literally how the Lean/general-spin question in §2 was evaluated and parked.
-- **Narrow-charter subagents** hand work off to each other rather than one general agent doing
-  everything end to end: `physics-theorist` (pure symbolic/LLM reasoning, no code — derivations and
-  sign/convention checks), `mathematica-expert` (writes and runs actual Wolfram Language scripts
-  to machine-verify a claim), `latex-writer` (typesets an already-verified result into a note).
-- **Dual-adversarial review:** a stepwise unit of derivation is checked by two independent
-  reviewers using genuinely different methods (e.g. one re-derives by hand, one machine-verifies
-  numerically), and any disagreement between them blocks progress until it's reconciled.
+is the actual reason this workspace is built the way it is:
+project-wide rule files, task-specific skills, narrow-charter subagents, and a dual-adversarial
+review discipline — with a second coding tool (Cursor) running its own heavier version of the same
+review discipline for the project's longest, most complex tasks. The full inventory for both
+tools, and how Cursor's version compares to Claude Code's, is in
+[`METHODOLOGY.md`](METHODOLOGY.md).
 
 The physics work itself is produced through Claude Code sessions: symbolic derivations and
 reasoning by the model, heavy tensor-calculus computations machine-verified in Wolfram
@@ -149,8 +120,8 @@ links to other entries. A small Python checker (`python_scripts/check_claims.py`
 ledger's internal consistency (every dependency resolves, every cited artifact exists, etc.)
 before anything is promoted into it. Nothing enters the ledger without Cabass reading the note
 and explicitly naming which statements are results. The rule governing all of this — what counts
-as evidence, how an entry gets promoted, the schema — ships with this repository as a trimmed copy
-at `latex_notes/structure/established-results.md`; the mechanical fold procedure itself is at
+as evidence, how an entry gets promoted, the schema — ships with this repository at
+`latex_notes/structure/established-results.md`; the mechanical fold procedure itself is at
 `latex_notes/structure/README.how_to_fold.txt`.
 
 This ledger design was arrived at independently, then found to have a close public precedent:
@@ -165,7 +136,7 @@ identity or invariance statement traced to a machine-verified Mathematica deriva
 adapts a verifiable-claims research methodology, already demonstrated publicly for
 numerical/data-analysis work, to symbolic/analytic theoretical physics.
 
-The demo's two generated views (`latex_notes/structure/dependency_graph.md` and
+This repository's two generated views (`latex_notes/structure/dependency_graph.md` and
 `claim_dashboard.html`) go further than independent convergence: they were built by directly
 reading Zaldarriaga's own `scripts/build_dashboard.py` and `structure/dependency_graph.md`, and
 adopt several of his design choices outright — labeling each dependency-graph node with a short
