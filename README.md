@@ -1,10 +1,14 @@
-# Brief: DBI Cosmological Collider project, for website work
+# DBI Cosmological Collider
 
-This is a cold-start summary for whoever (human or agent) is working on Giovanni Cabass's
-website and needs to know what this project is, where it stands, and what might be shown
-publicly. It is written to be self-contained — no access to the project's own workspace is
-assumed. It describes the state of things as of **2026-11-08**; re-check before relying on any
-status claim below if this file is read much later.
+This repository is a small, self-contained excerpt from Giovanni Cabass's ongoing research
+project on inflationary cosmology — constructing the **DBI Cosmological Collider**, the coupled
+Goldstone-plus-spinning-field system that imposes the DBI boost symmetry consistently in a
+cosmological (FRW/de Sitter) background, not just in flat spacetime. Rather than only describing
+the project, it shows one worked, machine-verified result end to end: the physics note, the
+Mathematica scripts that verify it, and the result ledger and checking tool that tie each claim to
+its evidence.
+
+State of things as of **2026-11-08**.
 
 ## 1. The physics problem
 
@@ -57,15 +61,12 @@ methods are being pursued:
   classification step it depends on has only ever been exercised on a scalar-type equation.
 
 Beyond spin-2, the actual long-term goal is a method that settles any spin $s$ at once, rather
-than re-running a spin-by-spin construction forever. The hoped-for handle for that: the
-background that spontaneously breaks the DBI boost (the inflating FRW background) and a
-boost-*preserving* configuration are related by the very symmetry that's broken — the broken
-background is reachable from an unbroken one by acting with a DBI boost. If that relation can be
-exploited directly at the level of on-shell quantities (correlators / Ward identities for the
-broken generator) rather than through an explicit off-shell Lagrangian or equation of motion
-built field by field, the hope is that the resulting constraint is structural and spin-blind — in
-the same spirit as a soft theorem from a spontaneously broken symmetry not caring about the spin
-of the hard particles it's applied to. This is a hope, not a result. (Separately, a
+than re-running a spin-by-spin construction forever. One direction being considered: working
+directly at the level of on-shell quantities (correlators / Ward identities for the broken DBI
+boost generator) rather than through an explicit off-shell Lagrangian or equation of motion built
+field by field, in the hope that the resulting constraint turns out to be structural and
+spin-blind — in the same spirit as a soft theorem from a spontaneously broken symmetry not caring
+about the spin of the hard particles it's applied to. This is a hope, not a result. (Separately, a
 formal-verification tool, Lean/Mathlib, was explored as a possible engine for a general-spin
 induction step on the Method B/EOM side specifically, and set aside — Mathematica can check
 specific low spins one at a time but can't prove a statement for all $s$ at once.) No method, on
@@ -74,16 +75,21 @@ this is a live, open research direction, not a solved roadmap.
 
 ## 3. Status as of 2026-11-08
 
-- **Scalar (Goldstone) sector:** fully worked out and machine-verified — the ambient-space
-  Killing vectors, the Lie-derivative form of the DBI boost, the DBI inflaton action and its
-  Stueckelberg/Goldstone expansion. This is the solved, closed part of the problem.
-- **Spin-1:** redone from scratch under the stricter verification discipline described in §4; the
-  redo is drafted and has passed its internal dual-review process, but has not yet been
-  executed/promoted into the project's permanent result ledger.
-- **Spin-2:** literature-based scaffolding exists from earlier work but has not yet been
-  re-audited to the stricter standard established for spin-1; not yet a settled result.
-- **Generic spin $s$:** open question — not yet decided whether/how to generalize beyond
-  spin-2, pending the spin-1/spin-2 audits actually closing.
+- **Scalar (Goldstone) sector:** fully worked out and machine-verified by both construction
+  methods described in §2 — Method A (the covariant Lagrangian) and Method B (the blind,
+  equation-of-motion-first construction) — cross-checked against each other. This is the solved,
+  closed part of the problem. This repository's `claims.json` currently holds only the entries
+  folded in from note 01, the one worked example shown here; the rest of the scalar sector is
+  already verified and not yet folded into the ledger.
+- **Spin-1:** Method A redone from scratch under the stricter verification discipline described in
+  §4; drafted and has passed its internal dual-review process, but not yet executed/promoted into
+  the project's permanent result ledger. Method B has not been extended past the scalar case.
+- **Spin-2:** Method A's literature-based scaffolding exists from earlier work but has not yet
+  been re-audited to the stricter standard established for spin-1; not yet a settled result.
+  Method B has not been extended here either.
+- **Generic spin $s$:** open on every front — not yet decided whether/how to extend Method A or
+  Method B beyond spin-2, and the on-shell/correlator idea sketched in §2 is a hope, not yet a
+  chosen method.
 
 ## 4. Methodology and tooling
 
@@ -135,13 +141,17 @@ Language/Mathematica, written up in LaTeX. Every claim that matters (an invarian
 sign, a parameter relation) is required to have an actual machine-checked derivation behind it —
 never just "this looks right."
 
-**The result ledger** is the most recent and most structured layer on top of all this. As of this month, established results are being migrated into a single
-JSON ledger, `latex_notes/structure/claims.json`: each entry is one atomic, citable statement
-(a precise sentence plus its formula), pointing at the `.tex` note it's stated in and the
-Mathematica script + clean log that verifies it, with explicit `depends_on` links to other
-entries. A small Python checker validates the ledger's internal consistency (every dependency
-resolves, every cited artifact exists, etc.) before anything is promoted into it. Nothing enters
-the ledger without the user reading the note and explicitly naming which statements are results.
+**The result ledger** is the most recent and most structured layer on top of all this. Established
+results live in a single JSON ledger, `latex_notes/structure/claims.json`: each entry is one
+atomic, citable statement (a precise sentence plus its formula), pointing at the `.tex` note it's
+stated in and the Mathematica script + clean log that verifies it, with explicit `depends_on`
+links to other entries. A small Python checker (`python_scripts/check_claims.py`) validates the
+ledger's internal consistency (every dependency resolves, every cited artifact exists, etc.)
+before anything is promoted into it. Nothing enters the ledger without Cabass reading the note
+and explicitly naming which statements are results. The rule governing all of this — what counts
+as evidence, how an entry gets promoted, the schema — ships with this repository as a trimmed copy
+at `latex_notes/structure/established-results.md`; the mechanical fold procedure itself is at
+`latex_notes/structure/README.how_to_fold.txt`.
 
 This ledger design was arrived at independently, then found to have a close public precedent:
 **Matias Zaldarriaga's arXiv:2606.30527** ("Universal distance modes from DESI BAO and Type Ia
@@ -151,10 +161,19 @@ HTML dashboard that traces every quoted number in the paper back to the script a
 produced it, explicitly "to enable systematic verification that every scientific claim traces to
 code and data." The DBI project's ledger does the same thing for a different kind of claim: not a
 numerical result traced to a Python script and a data file, but a symbolic tensor-calculus
-identity or invariance statement traced to a machine-verified Mathematica derivation. If useful
-framing for the website: this project is adapting a verifiable-claims research methodology,
-already demonstrated publicly for numerical/data-analysis work, to symbolic/analytic theoretical
-physics.
+identity or invariance statement traced to a machine-verified Mathematica derivation. This project
+adapts a verifiable-claims research methodology, already demonstrated publicly for
+numerical/data-analysis work, to symbolic/analytic theoretical physics.
+
+The demo's two generated views (`latex_notes/structure/dependency_graph.md` and
+`claim_dashboard.html`) go further than independent convergence: they were built by directly
+reading Zaldarriaga's own `scripts/build_dashboard.py` and `structure/dependency_graph.md`, and
+adopt several of his design choices outright — labeling each dependency-graph node with a short
+description rather than a bare id, a claim-count summary line, and the dashboard's collapsible
+per-claim panels, accent-bordered cards, and jump-to-highlight navigation. (Not adopted: his
+dashboard renders claims as plain, LaTeX-stripped text rather than typeset math, since his claims
+are numerical/data statements rather than tensor-calculus formulas — this project's claims needed
+real rendering, so it vendors KaTeX instead.)
 
 One piece Zaldarriaga's repo has that this project doesn't (yet): a `logic.yaml`-style
 section-level argument skeleton linking a paper's narrative sections to the claims they rest on.

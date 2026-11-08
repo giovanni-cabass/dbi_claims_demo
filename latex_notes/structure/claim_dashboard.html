@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims dashboard</title>
+<link rel="stylesheet" href="../../vendor/katex/katex.min.css">
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          max-width: 860px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  h1 { font-size: 1.4rem; }
+  .claim { border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+            border-left: 4px solid #6366f1;
+            border-radius: 8px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .claim:target { animation: flash 1.6s ease-out; }
+  @keyframes flash {
+    0% { background: color-mix(in srgb, gold 35%, transparent); }
+    100% { background: transparent; }
+  }
+  .panel-header { display: flex; align-items: center; justify-content: space-between;
+                   gap: 0.75rem; cursor: pointer; user-select: none; }
+  .claim h2 { font-size: 1rem; margin: 0 0 0.5rem 0; }
+  .expand-icon { font-size: 1.1rem; font-weight: 300; opacity: 0.55; width: 1.5rem;
+                  text-align: center; flex-shrink: 0; }
+  .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em;
+          border-radius: 4px; padding: 0.15rem 0.5rem;
+          background: color-mix(in srgb, currentColor 12%, transparent); }
+  .statement { margin: 0.5rem 0; }
+  .formula { margin: 0.75rem 0; overflow-x: auto; }
+  .panel-detail { margin-top: 0.5rem; padding-top: 0.5rem;
+                   border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+  .meta { font-size: 0.85rem; opacity: 0.75; margin: 0.35rem 0; }
+  .evidence { font-size: 0.85rem; opacity: 0.85; margin: 0.25rem 0 0.75rem 0; }
+  code { font-size: 0.9em; }
+  footer { font-size: 0.8rem; opacity: 0.6; margin-top: 2rem; text-align: center;
+            border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+            padding-top: 1rem; }
+</style>
+</head>
+<body>
+<h1>Claims dashboard</h1>
+<p class="meta">Generated from <code>claims.json</code> by <code>generate_views.py</code> --
+do not hand-edit this file. See <a href="dependency_graph.md">dependency_graph.md</a> for the
+dependency graph.</p>
+<section id="dbi_static_gauge_formula" class="claim">
+  <div class="panel-header" onclick="togglePanel('dbi_static_gauge_formula')">
+    <h2><code>dbi_static_gauge_formula</code> <span class="tag tag-established">established</span></h2>
+    <span class="expand-icon" id="icon-dbi_static_gauge_formula">+</span>
+  </div>
+  <p class="statement">In terms of the Killing vector $K^A$ of the ambient space for a given generator, the static-gauge formula for $\delta\phi$ is $\delta\phi = K^5\big|_{X=(x,\phi)} - K^\mu\big|_{X=(x,\phi)}\,\partial_\mu\phi$, where $K^5=K^\phi$ is the shift of the transverse coordinate and $-K^\mu\partial_\mu\phi$ re-fixes static gauge.</p>
+  <div class="formula" data-formula="\delta\phi = K^5\big|_{X=(x,\phi)} - K^\mu\big|_{X=(x,\phi)}\,\partial_\mu\phi"></div>
+  <div class="panel-detail" id="detail-dbi_static_gauge_formula" style="display:none">
+  <p class="meta"><a href="../../latex_notes/01.starting_setup.tex"><code>latex_notes/01.starting_setup.tex</code></a> (<code>eq:static-gauge-formula</code>) &middot; script-verified-wl &middot; signed off 2026-11-08</p>
+  <p class="meta">evidence:</p>
+  <ul class="evidence"><li><a href="../../mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl"><code>mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl</code></a></li><li><a href="../../out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"><code>out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt</code></a></li></ul>
+  </div>
+</section>
+<section id="dbi_boost_spatial_exact" class="claim">
+  <div class="panel-header" onclick="togglePanel('dbi_boost_spatial_exact')">
+    <h2><code>dbi_boost_spatial_exact</code> <span class="tag tag-established">established</span></h2>
+    <span class="expand-icon" id="icon-dbi_boost_spatial_exact">+</span>
+  </div>
+  <p class="statement">The spatial DBI-boost generator $M^{i\phi}$&#x27;s Killing vector in $dS_5$ (flat FRW slicing) satisfies the Killing equations without $H$-modification, giving $\delta_{M^{i\phi}}\phi = -x^i - \phi\,\partial_i\phi$ — the flat-space result, exact, with no $H$-corrections.</p>
+  <div class="formula" data-formula="\delta_{M^{i\phi}}\phi = -x^i - \phi\,\partial_i\phi"></div>
+  <div class="panel-detail" id="detail-dbi_boost_spatial_exact" style="display:none">
+  <p class="meta"><a href="../../latex_notes/01.starting_setup.tex"><code>latex_notes/01.starting_setup.tex</code></a> (<code>eq:delta-phi-spatial</code>) &middot; script-verified-wl &middot; signed off 2026-11-08</p>
+  <p class="meta">depends on: <a href="#dbi_static_gauge_formula"><code>dbi_static_gauge_formula</code></a></p>
+  <p class="meta">evidence:</p>
+  <ul class="evidence"><li><a href="../../mathematica_scripts/01_killing_vectors_check.wl"><code>mathematica_scripts/01_killing_vectors_check.wl</code></a></li><li><a href="../../out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt"><code>out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt</code></a></li><li><a href="../../mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl"><code>mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl</code></a></li><li><a href="../../out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"><code>out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt</code></a></li></ul>
+  </div>
+</section>
+<section id="dbi_boost_temporal_hcorrected" class="claim">
+  <div class="panel-header" onclick="togglePanel('dbi_boost_temporal_hcorrected')">
+    <h2><code>dbi_boost_temporal_hcorrected</code> <span class="tag tag-established">established</span></h2>
+    <span class="expand-icon" id="icon-dbi_boost_temporal_hcorrected">+</span>
+  </div>
+  <p class="statement">Applying the static-gauge formula with the temporal generator&#x27;s $dS_5$ Killing vector gives $\delta_{M^{0\phi}}\phi = \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\left(\vec{x}^2-\phi^2\right) - \phi\,\partial_t\phi + H\phi\,x^i\partial_i\phi$ — the temporal boost receives genuine $H$-corrections relative to the flat-space form.</p>
+  <div class="formula" data-formula="\delta_{M^{0\phi}}\phi = \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\left(\vec{x}^2-\phi^2\right) - \phi\,\partial_t\phi + H\phi\,x^i\partial_i\phi"></div>
+  <div class="panel-detail" id="detail-dbi_boost_temporal_hcorrected" style="display:none">
+  <p class="meta"><a href="../../latex_notes/01.starting_setup.tex"><code>latex_notes/01.starting_setup.tex</code></a> (<code>eq:delta-phi-temporal</code>) &middot; script-verified-wl &middot; signed off 2026-11-08</p>
+  <p class="meta">depends on: <a href="#dbi_static_gauge_formula"><code>dbi_static_gauge_formula</code></a></p>
+  <p class="meta">evidence:</p>
+  <ul class="evidence"><li><a href="../../mathematica_scripts/01_killing_vectors_check.wl"><code>mathematica_scripts/01_killing_vectors_check.wl</code></a></li><li><a href="../../out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt"><code>out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt</code></a></li><li><a href="../../mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl"><code>mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl</code></a></li><li><a href="../../out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"><code>out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt</code></a></li></ul>
+  </div>
+</section>
+<section id="dbi_boost_flat_precursor" class="claim">
+  <div class="panel-header" onclick="togglePanel('dbi_boost_flat_precursor')">
+    <h2><code>dbi_boost_flat_precursor</code> <span class="tag tag-established">established</span></h2>
+    <span class="expand-icon" id="icon-dbi_boost_flat_precursor">+</span>
+  </div>
+  <p class="statement">The flat-space $M^{\mu5}$ generator, derived via the ambient transformation (eq.&nbsp;ambient-transform) plus static-gauge refixing of the worldvolume label, induces $\delta\phi = -b^\mu\phi\,\partial_\mu\phi - b_\mu x^\mu$ on the brane embedding scalar, matching <code>2404.01894v2</code> up to the sign convention $b\to-b$.</p>
+  <div class="formula" data-formula="\delta\phi = -b^\mu\phi\,\partial_\mu\phi - b_\mu x^\mu"></div>
+  <div class="panel-detail" id="detail-dbi_boost_flat_precursor" style="display:none">
+  <p class="meta"><a href="../../latex_notes/01.starting_setup.tex"><code>latex_notes/01.starting_setup.tex</code></a> (<code>eq:flat-dbi-boost</code>) &middot; script-verified-wl &middot; signed off 2026-11-08</p>
+  <p class="meta">evidence:</p>
+  <ul class="evidence"><li><a href="../../mathematica_scripts/01_killing_vectors_check.wl"><code>mathematica_scripts/01_killing_vectors_check.wl</code></a></li><li><a href="../../out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt"><code>out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt</code></a></li><li><a href="../../mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl"><code>mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl</code></a></li><li><a href="../../out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"><code>out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt</code></a></li></ul>
+  </div>
+</section>
+<section id="induced_metric_ds5_embedding" class="claim">
+  <div class="panel-header" onclick="togglePanel('induced_metric_ds5_embedding')">
+    <h2><code>induced_metric_ds5_embedding</code> <span class="tag tag-established">established</span></h2>
+    <span class="expand-icon" id="icon-induced_metric_ds5_embedding">+</span>
+  </div>
+  <p class="statement">The induced (DBI) metric on the brane, pulled back from the $dS_5$ ambient metric via the embedding $X^A(x^\mu)=(t,x^1,x^2,x^3,\phi(x^\mu))$, is $\tilde g_{\mu\nu} = g^{dS}_{\mu\nu} + a^2(t)\,\partial_\mu\phi\,\partial_\nu\phi$, with $g^{dS}_{\mu\nu}=\mathrm{diag}(-1,a^2,a^2,a^2)$ the 4D de Sitter metric.</p>
+  <div class="formula" data-formula="\tilde{g}_{\mu\nu} = G_{AB}\,\frac{\partial X^A}{\partial x^\mu}\frac{\partial X^B}{\partial x^\nu} = g^{dS}_{\mu\nu} + a^2(t)\,\partial_\mu\phi\,\partial_\nu\phi"></div>
+  <div class="panel-detail" id="detail-induced_metric_ds5_embedding" style="display:none">
+  <p class="meta"><a href="../../latex_notes/01.starting_setup.tex"><code>latex_notes/01.starting_setup.tex</code></a> (<code>eq:induced-metric</code>) &middot; script-verified-wl &middot; signed off 2026-11-08</p>
+  <p class="meta">evidence:</p>
+  <ul class="evidence"><li><a href="../../mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl"><code>mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl</code></a></li><li><a href="../../out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"><code>out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt</code></a></li></ul>
+  </div>
+</section>
+<footer>0 given, 5 established, 0 fenced, 0 retired</footer>
+<script src="../../vendor/katex/katex.min.js"></script>
+<script src="../../vendor/katex/contrib/auto-render.min.js"></script>
+<script>
+  document.querySelectorAll(".formula").forEach(function (el) {
+    katex.render(el.dataset.formula, el, { displayMode: true, throwOnError: false });
+  });
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+  });
+
+  function togglePanel(id) {
+    var detail = document.getElementById("detail-" + id);
+    var icon = document.getElementById("icon-" + id);
+    if (!detail) return;
+    var open = detail.style.display !== "none";
+    detail.style.display = open ? "none" : "block";
+    if (icon) icon.textContent = open ? "+" : String.fromCharCode(8722);
+  }
+  function expandFromHash() {
+    var id = window.location.hash.slice(1);
+    if (!id) return;
+    var detail = document.getElementById("detail-" + id);
+    var icon = document.getElementById("icon-" + id);
+    if (detail && detail.style.display === "none") {
+      detail.style.display = "block";
+      if (icon) icon.textContent = String.fromCharCode(8722);
+    }
+  }
+  window.addEventListener("hashchange", expandFromHash);
+  expandFromHash();
+</script>
+</body>
+</html>
