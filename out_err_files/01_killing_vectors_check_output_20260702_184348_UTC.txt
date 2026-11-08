@@ -1,0 +1,24 @@
+"🚀 Script: ""01_killing_vectors_check"".wl"
+"📅 Started: ""Thursday July 02, 2026 18:43:48"
+"=== PART 1: Christoffel symbols vs. claimed closed form ==="
+"All 125 components match the note's Gamma^0_{ab}=H a^2 delta_{ab}, \
+Gamma^a_{0b}=H delta^a_b (else 0): "True
+""
+"=== PART 2-4: Killing equation residual (symbolic) ==="
+"Spatial M^{i phi}, i=1,2,3 -- residual identically zero: "{True, True, True}
+"Temporal M^{0 phi} -- residual identically zero: "True
+""
+"=== PART 5: Numeric spot-check (5 random points, SeedRandom[42]) ==="
+"Spatial i=1,2,3, max |residual|: "{0, 0, 0}
+"Temporal, max |residual|: "1.0436096431476471*^-14
+""
+"=== PART 6: H -> 0 limit checks ==="
+<|"Spatial i=1 -> {0,phi,0,0,-x1}" -> True, 
+  "Spatial i=2 -> {0,0,phi,0,-x2}" -> True, 
+  "Spatial i=3 -> {0,0,0,phi,-x3}" -> True, 
+  "Temporal -> {phi,0,0,0,t}" -> True|>
+""
+"Saved to: ""mathematica\
+_outputs/01_killing_vectors_check.m"
+"TeX snippet saved to: ""mathematica_outputs/01_killing_vectors_check.tex"
+"🏁 Execution finished."

@@ -1,0 +1,102 @@
+{
+  "given": [],
+  "established": [
+    {
+      "id": "dbi_static_gauge_formula",
+      "statement": "In terms of the Killing vector $K^A$ of the ambient space for a given generator, the static-gauge formula for $\\delta\\phi$ is $\\delta\\phi = K^5\\big|_{X=(x,\\phi)} - K^\\mu\\big|_{X=(x,\\phi)}\\,\\partial_\\mu\\phi$, where $K^5=K^\\phi$ is the shift of the transverse coordinate and $-K^\\mu\\partial_\\mu\\phi$ re-fixes static gauge.",
+      "file": "latex_notes/01.starting_setup.tex",
+      "section": "eq:static-gauge-formula",
+      "depends_on": [],
+      "verification": "script-verified-wl",
+      "evidence": {
+        "artifacts": [
+          "mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl",
+          "out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"
+        ],
+        "date": "2026-11-08"
+      },
+      "signed_off": "2026-11-08",
+      "formula": "\\delta\\phi = K^5\\big|_{X=(x,\\phi)} - K^\\mu\\big|_{X=(x,\\phi)}\\,\\partial_\\mu\\phi"
+    },
+    {
+      "id": "dbi_boost_spatial_exact",
+      "statement": "The spatial DBI-boost generator $M^{i\\phi}$'s Killing vector in $dS_5$ (flat FRW slicing) satisfies the Killing equations without $H$-modification, giving $\\delta_{M^{i\\phi}}\\phi = -x^i - \\phi\\,\\partial_i\\phi$ — the flat-space result, exact, with no $H$-corrections.",
+      "file": "latex_notes/01.starting_setup.tex",
+      "section": "eq:delta-phi-spatial",
+      "depends_on": [
+        "dbi_static_gauge_formula"
+      ],
+      "verification": "script-verified-wl",
+      "evidence": {
+        "artifacts": [
+          "mathematica_scripts/01_killing_vectors_check.wl",
+          "out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt",
+          "mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl",
+          "out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"
+        ],
+        "date": "2026-11-08"
+      },
+      "signed_off": "2026-11-08",
+      "formula": "\\delta_{M^{i\\phi}}\\phi = -x^i - \\phi\\,\\partial_i\\phi"
+    },
+    {
+      "id": "dbi_boost_temporal_hcorrected",
+      "statement": "Applying the static-gauge formula with the temporal generator's $dS_5$ Killing vector gives $\\delta_{M^{0\\phi}}\\phi = \\frac{e^{-Ht}\\sinh(Ht)}{H} + \\frac{H}{2}\\left(\\vec{x}^2-\\phi^2\\right) - \\phi\\,\\partial_t\\phi + H\\phi\\,x^i\\partial_i\\phi$ — the temporal boost receives genuine $H$-corrections relative to the flat-space form.",
+      "file": "latex_notes/01.starting_setup.tex",
+      "section": "eq:delta-phi-temporal",
+      "depends_on": [
+        "dbi_static_gauge_formula"
+      ],
+      "verification": "script-verified-wl",
+      "evidence": {
+        "artifacts": [
+          "mathematica_scripts/01_killing_vectors_check.wl",
+          "out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt",
+          "mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl",
+          "out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"
+        ],
+        "date": "2026-11-08"
+      },
+      "signed_off": "2026-11-08",
+      "formula": "\\delta_{M^{0\\phi}}\\phi = \\frac{e^{-Ht}\\sinh(Ht)}{H} + \\frac{H}{2}\\left(\\vec{x}^2-\\phi^2\\right) - \\phi\\,\\partial_t\\phi + H\\phi\\,x^i\\partial_i\\phi"
+    },
+    {
+      "id": "dbi_boost_flat_precursor",
+      "statement": "The flat-space $M^{\\mu5}$ generator, derived via the ambient transformation \\eq{eq:ambient-transform} plus static-gauge refixing of the worldvolume label, induces $\\delta\\phi = -b^\\mu\\phi\\,\\partial_\\mu\\phi - b_\\mu x^\\mu$ on the brane embedding scalar, matching \\texttt{2404.01894v2} up to the sign convention $b\\to-b$.",
+      "file": "latex_notes/01.starting_setup.tex",
+      "section": "eq:flat-dbi-boost",
+      "depends_on": [],
+      "verification": "script-verified-wl",
+      "evidence": {
+        "artifacts": [
+          "mathematica_scripts/01_killing_vectors_check.wl",
+          "out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt",
+          "mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl",
+          "out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"
+        ],
+        "date": "2026-11-08"
+      },
+      "signed_off": "2026-11-08",
+      "formula": "\\delta\\phi = -b^\\mu\\phi\\,\\partial_\\mu\\phi - b_\\mu x^\\mu"
+    },
+    {
+      "id": "induced_metric_ds5_embedding",
+      "statement": "The induced (DBI) metric on the brane, pulled back from the $dS_5$ ambient metric via the embedding $X^A(x^\\mu)=(t,x^1,x^2,x^3,\\phi(x^\\mu))$, is $\\tilde g_{\\mu\\nu} = g^{dS}_{\\mu\\nu} + a^2(t)\\,\\partial_\\mu\\phi\\,\\partial_\\nu\\phi$, with $g^{dS}_{\\mu\\nu}=\\mathrm{diag}(-1,a^2,a^2,a^2)$ the 4D de Sitter metric.",
+      "file": "latex_notes/01.starting_setup.tex",
+      "section": "eq:induced-metric",
+      "depends_on": [],
+      "verification": "script-verified-wl",
+      "evidence": {
+        "artifacts": [
+          "mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl",
+          "out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt"
+        ],
+        "date": "2026-11-08"
+      },
+      "signed_off": "2026-11-08",
+      "formula": "\\tilde{g}_{\\mu\\nu} = G_{AB}\\,\\frac{\\partial X^A}{\\partial x^\\mu}\\frac{\\partial X^B}{\\partial x^\\nu} = g^{dS}_{\\mu\\nu} + a^2(t)\\,\\partial_\\mu\\phi\\,\\partial_\\nu\\phi"
+    }
+  ],
+  "fenced": [],
+  "retired_ids": {}
+}

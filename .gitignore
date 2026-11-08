@@ -1,0 +1,19 @@
+# macOS Finder metadata
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# LaTeX build artifacts (in case 01.starting_setup.tex is ever recompiled here)
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# check_claims.py's own run logs (named after the script, not the note/script being verified —
+# never collides with a real evidence log like 01_killing_vectors_check_output_*.txt)
+out_err_files/check_claims_output_*.txt
+out_err_files/check_claims_errors_*.txt

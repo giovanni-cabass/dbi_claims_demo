@@ -1,0 +1,430 @@
+\documentclass[11pt]{article}
+
+\usepackage{macros}  % project macros — loads amsmath, amssymb, mathtools, etc.
+
+% ── Document-level packages (load after macros) ─────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{wrapfig}
+\usepackage{float}
+
+% ── Table styling ────────────────────────────────────────────────────
+\renewcommand{\arraystretch}{1.3}
+
+% ── hyperref must be loaded last ─────────────────────────────────────
+\definecolor{jade}{rgb}{0.0, 0.66, 0.42}
+\usepackage[colorlinks=true,citecolor=jade,linkcolor=jade,urlcolor=jade,pdfborder={0 0 0}]{hyperref}
+
+\title{Starting setup: probe brane in $dS_5$}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{\texorpdfstring{The 5D bulk: $dS_5$ in flat FRW slicing}{The 5D bulk: dS5 in flat FRW slicing}}
+
+We take the 5D bulk to be de Sitter space $dS_5$, written in flat FRW slicing with coordinates
+$X^A = (t, x^1, x^2, x^3, \phi)$:
+\begin{equation}
+\label{eq:bulk-metric}
+G_{AB} = \mathrm{diag}\!\left(-1,\, a^2(t),\, a^2(t),\, a^2(t),\, a^2(t)\right) \,\,, \qquad a(t) = e^{Ht} \,\,.
+\end{equation}
+This is $dS_5$ because $R_{AB} = 4H^2 G_{AB}$, consistent with the maximally symmetric condition
+$R_{AB} = (d-1)H^2 G_{AB}$ at $d=5$. The isometry group is $SO(1,5)$ with $\frac{5 \cdot 6}{2} = 15$ generators.
+Capital Latin indices $A, B, \ldots$ run over $\{0,1,2,3,\phi\}$; Greek indices $\mu,\nu,\ldots$ and
+lowercase Latin $i,j,k$ label the worldvolume directions $\{0,1,2,3\}$ and spatial worldvolume directions
+$\{1,2,3\}$, respectively.  We also use $a, b \in \{1,2,3,\phi\}$ for the four spatial directions of $dS_5$.
+
+The key feature: $dS_5$ treats all four spatial directions $(x^1, x^2, x^3, \phi)$ on equal footing.
+Its isometry algebra contains generators $M^{\mu\phi}$ that mix $\phi$ with the worldvolume
+directions $x^\mu$ --- these are the \emph{cosmological DBI boosts}.
+
+\paragraph{Why not $dS_4 \times \mathbb{R}$?}
+That product space has isometry group $SO(1,4)\times\mathbb{R}$: the $SO(1,4)$ acts on $x^\mu$ and
+$\mathbb{R}$ shifts $\phi$, but the two factors never mix.  There are no generators mixing $\phi$ with
+$x^\mu$, so no DBI boost is inherited by the brane action.  A fully symmetric ($dS_5$) ambient space
+is required.
+
+\section{Probe brane and induced metric}
+
+The brane worldvolume is parametrized by $x^\mu = (t, x^1, x^2, x^3)$, with the brane sitting at position
+$\phi = \phi(x^\mu)$ in the 5th direction.  The embedding map is
+\begin{equation}
+\label{eq:embedding}
+X^A(x^\mu) = \bigl(t,\; x^1,\; x^2,\; x^3,\; \phi(x^\mu)\bigr) \,\,,
+\qquad
+\frac{\partial X^A}{\partial x^\mu} = \delta^A_\mu + \delta^A_\phi\,\partial_\mu\phi \,\,.
+\end{equation}
+The induced (DBI) metric on the brane is
+\begin{equation}
+\label{eq:induced-metric}
+\tilde{g}_{\mu\nu}
+= G_{AB}\,\frac{\partial X^A}{\partial x^\mu}\frac{\partial X^B}{\partial x^\nu}
+= g^{dS}_{\mu\nu} + a^2(t)\,\partial_\mu\phi\,\partial_\nu\phi \,\,,
+\end{equation}
+% claim: id = induced_metric_ds5_embedding
+% claim: statement = The induced (DBI) metric on the brane, pulled back from the $dS_5$ ambient metric via the embedding $X^A(x^\mu)=(t,x^1,x^2,x^3,\phi(x^\mu))$, is $\tilde g_{\mu\nu} = g^{dS}_{\mu\nu} + a^2(t)\,\partial_\mu\phi\,\partial_\nu\phi$, with $g^{dS}_{\mu\nu}=\mathrm{diag}(-1,a^2,a^2,a^2)$ the 4D de Sitter metric.
+% claim: verification = script-verified-wl
+% claim: artifacts = mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl; out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt
+% claim: date = 2026-11-08
+% claim: formula = \tilde{g}_{\mu\nu} = G_{AB}\,\frac{\partial X^A}{\partial x^\mu}\frac{\partial X^B}{\partial x^\nu} = g^{dS}_{\mu\nu} + a^2(t)\,\partial_\mu\phi\,\partial_\nu\phi
+% claim: list = established
+where $g^{dS}_{\mu\nu} = \mathrm{diag}(-1, a^2, a^2, a^2)$ is the 4D de Sitter metric.  The
+$a^2(t)$ prefactor in front of $\partial_\mu\phi\,\partial_\nu\phi$ is a coordinate artifact of
+using the comoving $\phi$; it does not affect the symmetry structure.  The probe brane action is
+\begin{equation}
+\label{eq:action}
+S = -\Lambda^4 \int \dd^4 x\; \sqrt{-\tilde{g}} \,\,.
+\end{equation}
+This is invariant under the full $SO(1,5)$ by construction.
+
+\section{Symmetry breaking pattern}
+
+\paragraph{Brane at rest ($\phi = \text{const.}$).}
+The $SO(1,5)$ isometry is broken to $SO(1,4)$, the isometry group of the $dS_4$ worldvolume slice.
+The five broken generators of $SO(1,5)/SO(1,4)$ are: the four $M^{\mu\phi}$ (mixing each worldvolume
+direction $x^\mu$ with $\phi$) and $P_\phi$ (constant shift $\phi \to \phi + c$, giving the trivial
+$\delta\phi = c$).  Only the $M^{\mu\phi}$ are the DBI boosts of physical interest.
+
+\paragraph{Rolling background ($\dot{\bar\phi} \neq 0$).}
+The $SO(1,4)$ is further broken by the preferred time slicing.  The unbroken subgroup is $SO(3)$ plus
+three spatial de Sitter translations (6 generators).  The following table compares this with the
+flat-space DBI setup:
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & Flat DBI & Cosmological DBI \\
+\midrule
+Bulk & $\mathbb{R}^{1,4}$, $ISO(1,4)$, 15 gen. & $dS_5$, $SO(1,5)$, 15 gen. \\
+Background & $\bar\phi = \kappa t$ & $\bar\phi(t) = \int^t\kappa(t')\,\dd t'$, $\kappa$ not constant \\
+Unbroken & $SO(3)$ + 3 translations & $SO(3)$ + 3 dS translations \\
+DBI boosts & $M^{i\phi}$ of $ISO(1,4)$ & $M^{i\phi}$ of $SO(1,5)$ \\
+\bottomrule
+\end{tabular}
+\caption{Symmetry breaking in flat vs.\ cosmological DBI.}
+\label{tab:sym-breaking}
+\end{table}
+
+\paragraph{Sub-horizon limit.}
+For $k \gg H$, the $dS_5$ isometries reduce to the 5D Poincar\'e group $ISO(1,4)$ and the cosmological
+DBI boosts reduce to their flat-space counterparts.  Cosmological corrections are $\order{H/k}$.
+
+\section{DBI boost in flat space}
+\label{sec:flat-dbi-boost}
+
+We briefly review the flat-space derivation to set up notation for the cosmological extension.
+In this section $G_{AB} = \eta_{AB} = \mathrm{diag}(-1,+1,+1,+1,+1)$.
+
+\subsection{\texorpdfstring{Ambient transformation for $M^{\mu 5}$}{Ambient transformation for M\^{}mu5}}
+
+Using $5$ as the index label for the $\phi$-direction, under the generator $M^{\mu 5}$ with
+infinitesimal parameter $b^\mu$:
+\begin{equation}
+\label{eq:ambient-transform}
+\delta X^A = b^\mu\!\left(\delta^A_\mu\, X^5 - \delta^A_5\,\eta_{\mu\nu} X^\nu\right) \,\,.
+\end{equation}
+In components: $\delta X^\nu = b^\nu\phi$ and $\delta X^5 = -b^\mu\eta_{\mu\nu}X^\nu$.
+The sign in $\delta X^5$ comes from $b_0 = \eta_{00}b^0 = -b^0$: lowering the temporal index flips
+the sign.
+
+\subsection{Static gauge and the induced transformation}
+
+\emph{Static gauge} identifies worldvolume coordinates with ambient spacetime: $x^\mu \equiv X^\mu$.
+After this choice, the single physical degree of freedom is the transverse position $\phi(x) \equiv X^5$.
+
+When the ambient transformation \eq{eq:ambient-transform} is applied, two things happen simultaneously:
+(1) the worldvolume label shifts, $\tilde{x}^\mu = x^\mu + b^\mu\phi(x)$, and (2) the transverse
+coordinate shifts, $\tilde{X}^5 = \phi(x) - b_\mu x^\mu$.  The transformed configuration is no
+longer in static gauge.  To recover the transformation of $\phi$ at fixed worldvolume point, one
+re-fixes static gauge by inverting the label shift at first order in $b$:
+\begin{equation}
+\tilde\phi(\tilde{x}) = \phi\!\left(\tilde{x} - b\phi(\tilde{x})\right) - b_\mu\tilde{x}^\mu
+\approx \phi(\tilde{x}) - b^\mu\phi\,\partial_\mu\phi(\tilde{x}) - b_\mu\tilde{x}^\mu \,\,.
+\end{equation}
+Therefore
+\begin{equation}
+\label{eq:flat-dbi-boost}
+\delta\phi = -b^\mu\phi\,\partial_\mu\phi - b_\mu x^\mu \,\,.
+\end{equation}
+% claim: id = dbi_boost_flat_precursor
+% claim: statement = The flat-space $M^{\mu5}$ generator, derived via the ambient transformation \eq{eq:ambient-transform} plus static-gauge refixing of the worldvolume label, induces $\delta\phi = -b^\mu\phi\,\partial_\mu\phi - b_\mu x^\mu$ on the brane embedding scalar, matching \texttt{2404.01894v2} up to the sign convention $b\to-b$.
+% claim: verification = script-verified-wl
+% claim: artifacts = mathematica_scripts/01_killing_vectors_check.wl; out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt; mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl; out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt
+% claim: date = 2026-11-08
+% claim: formula = \delta\phi = -b^\mu\phi\,\partial_\mu\phi - b_\mu x^\mu
+% claim: list = established
+The $b^\mu\phi\,\partial_\mu\phi$ term arises entirely from re-fixing static gauge.
+(Reference \texttt{2404.01894v2} uses $b\to -b$, giving
+$\delta\phi = b^\mu\phi\,\partial_\mu\phi + b_\mu x^\mu$.)
+
+\subsection{Covariant static-gauge formula}
+
+In terms of the Killing vector $K^A$ of the ambient space for a given generator, the static-gauge
+formula for $\delta\phi$ is
+\begin{equation}
+\label{eq:static-gauge-formula}
+\delta\phi = K^5\big|_{X=(x,\phi)} - K^\mu\big|_{X=(x,\phi)}\,\partial_\mu\phi \,\,,
+\end{equation}
+% claim: id = dbi_static_gauge_formula
+% claim: statement = In terms of the Killing vector $K^A$ of the ambient space for a given generator, the static-gauge formula for $\delta\phi$ is $\delta\phi = K^5\big|_{X=(x,\phi)} - K^\mu\big|_{X=(x,\phi)}\,\partial_\mu\phi$, where $K^5=K^\phi$ is the shift of the transverse coordinate and $-K^\mu\partial_\mu\phi$ re-fixes static gauge.
+% claim: verification = script-verified-wl
+% claim: artifacts = mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl; out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt
+% claim: date = 2026-11-08
+% claim: formula = \delta\phi = K^5\big|_{X=(x,\phi)} - K^\mu\big|_{X=(x,\phi)}\,\partial_\mu\phi
+% claim: list = established
+where $K^5 = K^\phi$ is the shift of the transverse coordinate and $-K^\mu\partial_\mu\phi$
+re-fixes static gauge.  In flat space, $K^A = b^\mu(\phi\,\delta^A_\mu - \eta_{\mu\nu}x^\nu\delta^A_5)$,
+and \eq{eq:static-gauge-formula} reproduces \eq{eq:flat-dbi-boost}.
+
+\section{\texorpdfstring{Cosmological DBI boosts: Killing vectors of $dS_5$}{Cosmological DBI boosts: Killing vectors of dS5}}
+\label{sec:cosmo-dbi-boost}
+
+\subsection{Killing equations}
+
+The nonzero Christoffel symbols of \eq{eq:bulk-metric} are
+\begin{equation}
+\label{eq:christoffels}
+\Gamma^0_{ab} = He^{2Ht}\delta_{ab} \,\,, \qquad \Gamma^a_{0b} = H\delta^a_b
+\end{equation}
+for $a, b \in \{1,2,3,\phi\}$.  The Killing equations $\nabla_{(A}K_{B)} = 0$ in raised-index
+form reduce to
+\begin{subequations}
+\label{eq:killing-eqs}
+\begin{align}
+& \partial_t K^0 = 0 \,\,, \label{eq:k1} \\
+& \partial_t K^a = e^{-2Ht}\,\partial_a K^0 \,\,, \label{eq:k2} \\
+& \partial_a K^b + \partial_b K^a = -2H\delta_{ab} K^0 \,\,. \label{eq:k3}
+\end{align}
+\end{subequations}
+
+\subsection{\texorpdfstring{Spatial generators $M^{i\phi}$: no $H$-corrections}{Spatial generators M\^{}iphi: no H-corrections}}
+\label{subsec:spatial-boost}
+
+For the spatial generator $M^{i\phi}$ ($i \in \{1,2,3\}$), the flat-space Killing vector
+\begin{equation}
+\label{eq:spatial-killing}
+K^0 = 0 \,\,, \quad K^i = \phi \,\,, \quad K^{j \neq i} = 0 \,\,, \quad K^\phi = -x^i
+\end{equation}
+satisfies all three equations \eq{eq:killing-eqs} without modification.  In particular,
+\eq{eq:k3} for the pair $(i, \phi)$ reads $\partial_i K^\phi + \partial_\phi K^i = -1 + 1 = 0$.
+Applying \eq{eq:static-gauge-formula}:
+\begin{equation}
+\label{eq:delta-phi-spatial}
+\delta_{M^{i\phi}}\phi = -x^i - \phi\,\partial_i\phi \,\,.
+\end{equation}
+% claim: id = dbi_boost_spatial_exact
+% claim: statement = The spatial DBI-boost generator $M^{i\phi}$'s Killing vector in $dS_5$ (flat FRW slicing) satisfies the Killing equations without $H$-modification, giving $\delta_{M^{i\phi}}\phi = -x^i - \phi\,\partial_i\phi$ — the flat-space result, exact, with no $H$-corrections.
+% claim: verification = script-verified-wl
+% claim: artifacts = mathematica_scripts/01_killing_vectors_check.wl; out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt; mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl; out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt
+% claim: date = 2026-11-08
+% claim: depends_on = dbi_static_gauge_formula
+% claim: formula = \delta_{M^{i\phi}}\phi = -x^i - \phi\,\partial_i\phi
+% claim: list = established
+This is the flat-space result: no $H$-corrections for the spatial boosts.
+
+\subsection{Cross-check: two independent derivations}
+\label{subsec:spatial-crosscheck}
+
+The flat-space Killing vector \eq{eq:spatial-killing} can be confirmed by two routes
+independent of directly plugging the guess into \eq{eq:killing-eqs}.
+
+\paragraph{Method A --- embedding-space rotation.}
+In the $\mathbb{R}^{1,5}$ embedding \eq{eq:6d-embedding} used for the temporal generator,
+$M^{i\phi}$ mixes $Y^i$ and $Y^4$ ($\leftrightarrow\phi$). Since both are spacelike directions
+in $\eta_{MN}=\mathrm{diag}(-1,+1,\ldots,+1)$, this generator is a genuine rotation rather than
+a boost:
+\begin{equation}
+\label{eq:spatial-rotation-action}
+\delta Y^i = Y^4 \,\,, \qquad \delta Y^4 = -Y^i \,\,, \qquad \delta Y^{0,j\neq i,5}=0 \,\,.
+\end{equation}
+Solving $K^B\partial_BY^M=\delta Y^M$ with the ansatz $K^t=0$: the $Y^0$ and $Y^5$ equations
+(both built from $r^2=\vec{x}^2+\phi^2$) reduce to $He^{Ht}\left[K^ix^i+K^\phi\phi\right]=0$,
+satisfied identically once $K^i\propto\phi$ and $K^\phi\propto-x^i$ with matching coefficients.
+The $Y^i$ equation, $K^ie^{Ht}=e^{Ht}\phi$, then fixes $K^i=\phi$ exactly; the $Y^4$ equation,
+$K^\phi e^{Ht}=-e^{Ht}x^i$, fixes $K^\phi=-x^i$ exactly; the $Y^{j\neq i}$ equations force
+$K^j=0$. All five embedding equations are satisfied exactly, at every order in $H$ ---
+confirming \eq{eq:spatial-killing} by a route independent of \S\ref{subsec:spatial-boost}.
+
+\paragraph{Method B --- structural argument from the intrinsic equations.}
+Take $K^0=0$ as input (a rotation between two spacelike directions has no reason to touch
+$t$). Then \eq{eq:k1} is trivial, \eq{eq:k2} becomes $\partial_tK^a=e^{-2Ht}\partial_aK^0=0$
+for all $a$ (so every $K^a$ is exactly $t$-independent), and \eq{eq:k3} becomes
+$\partial_aK^b+\partial_bK^a=-2H\delta_{ab}K^0=0$ --- the \emph{flat} Killing equation on
+$\mathbb{R}^4=\{x^1,x^2,x^3,\phi\}$, since every $H$-dependent piece drops out along with
+$K^0$. The general solution is the flat $ISO(4)$ algebra, $K^a=c^a+\omega^{ab}x_b$ with
+$\omega^{ab}=-\omega^{ba}$ (4 translations $+$ 6 rotations), with \emph{zero} $H$-dependence
+anywhere, since $H$ never enters once $K^0\equiv0$. $M^{i\phi}$ is the specific basis element
+of this algebra with $\omega^{i\phi}=1$ and all other components zero, giving
+\begin{equation}
+\label{eq:crosscheck-spatial-result}
+K^i=\omega^{i\phi}\phi=\phi \,\,, \qquad K^\phi=\omega^{\phi i}x^i=-x^i \,\,,
+\end{equation}
+reproducing \eq{eq:spatial-killing} exactly. Unlike Method A, this argument also explains
+\emph{why} there are no $H$-corrections: any generator with $K^0=0$ decouples entirely from
+the warp factor $a(t)$, so the distinction between $dS_5$ and flat $\mathbb{R}^5$ is invisible
+to it.
+
+\subsection{\texorpdfstring{Temporal generator $M^{0\phi}$: $H$-corrections from embedding}{Temporal generator M\^{}0phi: H-corrections from embedding}}
+\label{subsec:temporal-boost}
+
+For the temporal boost $M^{0\phi}$, the flat-space Killing vector $K^0 = \phi$, $K^\phi = t$
+is \emph{not} a Killing vector of $dS_5$ and receives $H$-corrections.
+
+\paragraph{Embedding of $dS_5$.}
+Embed $dS_5$ in $\mathbb{R}^{1,5}$ (metric $\eta_{MN} = \mathrm{diag}(-1,+1,+1,+1,+1,+1)$,
+coordinates $Y^M$, $M \in \{0,1,2,3,4,5\}$) via
+\begin{equation}
+\label{eq:6d-embedding}
+Y^0 = H^{-1}\sinh(Ht) + \tfrac{H}{2}e^{Ht}r^2 \,\,, \quad
+Y^a = e^{Ht}x^a \,\,, \quad
+Y^5 = H^{-1}\cosh(Ht) - \tfrac{H}{2}e^{Ht}r^2 \,\,,
+\end{equation}
+where $r^2 = \vec{x}^2 + \phi^2$, $\vec{x}^2 = (x^1)^2 + (x^2)^2 + (x^3)^2$, and the index
+$a \in \{1,2,3,\phi\}$ corresponds to $Y^{1,2,3,4}$ respectively.  The hyperboloid
+$\eta_{MN}Y^MY^N = H^{-2}$ is $dS_5$.
+
+The $M^{0\phi}$ generator is a boost in the $(Y^0, Y^4)$ plane of $\mathbb{R}^{1,5}$:
+\begin{equation}
+\label{eq:boost-action}
+\delta Y^0 = Y^4 = e^{Ht}\phi \,\,, \qquad
+\delta Y^4 = Y^0 = H^{-1}\sinh(Ht) + \tfrac{H}{2}e^{Ht}r^2 \,\,, \qquad
+\delta Y^{1,2,3,5} = 0 \,\,.
+\end{equation}
+The Killing vector $K^A$ in intrinsic coordinates satisfies $K^B\partial_B Y^M = \delta Y^M$ for all $M$.
+
+\paragraph{Solving for $K^A$.}
+From $\delta Y^i = 0$ ($i = 1,2,3$), one finds immediately
+\begin{equation}
+\label{eq:ki-result}
+K^i = -H K^t x^i \qquad (i = 1,2,3) \,\,.
+\end{equation}
+To find $K^t$, use the identity $Y^0 + Y^5 = H^{-1}e^{Ht}$, which depends only on $t$.
+Adding the equations for $\delta Y^0$ and $\delta Y^5$:
+\begin{equation}
+K^B\partial_B(Y^0 + Y^5) = e^{Ht}\phi + 0 \implies K^t \cdot e^{Ht} = e^{Ht}\phi \implies K^t = \phi \,\,.
+\end{equation}
+(The spatial derivatives of $Y^0 + Y^5$ vanish since the $r^2$ terms cancel; the $K^i$ contributions
+also vanish for the same reason using \eq{eq:ki-result}.)  Substituting $K^t = \phi$ into the equation
+$K^B\partial_B Y^4 = \delta Y^4$:
+\begin{equation}
+\phi \cdot He^{Ht}\phi + K^\phi \cdot e^{Ht}
+= H^{-1}\sinh(Ht) + \tfrac{H}{2}e^{Ht}r^2 \,\,,
+\end{equation}
+which gives
+\begin{equation}
+\label{eq:kphi-result}
+K^\phi = \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\!\left(\vec{x}^2 - \phi^2\right) \,\,.
+\end{equation}
+
+\paragraph{Result.}
+The Killing vector for $M^{0\phi}$ in $dS_5$ (flat FRW slicing) is
+\begin{equation}
+\label{eq:temporal-killing}
+K^t = \phi \,\,, \qquad
+K^i = -H\phi\, x^i \quad (i=1,2,3) \,\,, \qquad
+K^\phi = \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\!\left(\vec{x}^2 - \phi^2\right) \,\,.
+\end{equation}
+One verifies all three Killing equations \eq{eq:killing-eqs}; in particular, \eq{eq:k2} for $a = \phi$
+gives $\partial_t K^\phi = e^{-Ht}(\cosh Ht - \sinh Ht) = e^{-2Ht}$, matching
+$e^{-2Ht}\,\partial_\phi K^0 = e^{-2Ht}$.
+
+\subsection{Cosmological DBI boost transformation}
+
+Applying the static-gauge formula \eq{eq:static-gauge-formula} with \eq{eq:temporal-killing}:
+\begin{equation}
+\label{eq:delta-phi-temporal}
+\delta_{M^{0\phi}}\phi
+= \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\!\left(\vec{x}^2 - \phi^2\right)
+- \phi\,\partial_t\phi + H\phi\, x^i\partial_i\phi \,\,.
+\end{equation}
+% claim: id = dbi_boost_temporal_hcorrected
+% claim: statement = Applying the static-gauge formula with the temporal generator's $dS_5$ Killing vector gives $\delta_{M^{0\phi}}\phi = \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\left(\vec{x}^2-\phi^2\right) - \phi\,\partial_t\phi + H\phi\,x^i\partial_i\phi$ — the temporal boost receives genuine $H$-corrections relative to the flat-space form.
+% claim: verification = script-verified-wl
+% claim: artifacts = mathematica_scripts/01_killing_vectors_check.wl; out_err_files/01_killing_vectors_check_errors_20260702_184348_UTC.txt; mathematica_scripts/01_static_gauge_formula_and_pullback_check.wl; out_err_files/01_static_gauge_formula_and_pullback_check_errors_20261108_005636_UTC.txt
+% claim: date = 2026-11-08
+% claim: depends_on = dbi_static_gauge_formula
+% claim: formula = \delta_{M^{0\phi}}\phi = \frac{e^{-Ht}\sinh(Ht)}{H} + \frac{H}{2}\left(\vec{x}^2-\phi^2\right) - \phi\,\partial_t\phi + H\phi\,x^i\partial_i\phi
+% claim: list = established
+Here $-K^\mu\partial_\mu\phi = -K^0\partial_t\phi - K^i\partial_i\phi$
+contributes $-\phi\,\partial_t\phi$ (from $K^0 = \phi$) and $+H\phi x^i\partial_i\phi$
+(from $K^i = -H\phi x^i$).
+
+\paragraph{Sub-horizon (flat-space) limit.}
+The correct expansion parameter is the dimensionless combination $H\ell$, where $\ell$ is any
+relevant physical scale ($t$, $|x^i|$, $|\phi|$, all of which carry dimension
+$L$).\footnote{Physical, not comoving: $t$ is already physical; a comoving spatial scale is
+$x_{\rm phys}=a(t)\,x^i$.}  In the sub-horizon
+limit $H\ell \ll 1$ (equivalently $k \gg H$ in Fourier space), each correction is suppressed:
+$\frac{e^{-Ht}\sinh Ht}{H} = t - Ht^2 + \order{H^2 t^3} \approx t$,
+while $\frac{H}{2}(\vec{x}^2-\phi^2) = \order{H\ell^2}$ and $H\phi\,x^i\partial_i\phi = \order{H\ell^2}$.
+At leading order, \eq{eq:delta-phi-temporal} reduces to $\delta\phi \approx t - \phi\,\partial_t\phi$,
+matching the flat-space result \eq{eq:flat-dbi-boost} for the temporal component.
+
+\paragraph{Structure of $H$-corrections.}
+Comparing \eq{eq:temporal-killing} with the flat-space Killing vector
+$(K^t, K^\phi)_{\mathrm{flat}} = (\phi,\, t)$:
+\begin{itemize}
+\item $K^\phi$ is modified: $t \to \frac{e^{-Ht}\sinh Ht}{H}$, and the new term
+      $+\frac{H}{2}(\vec{x}^2 - \phi^2)$ appears.
+\item The worldvolume components $K^i = -H\phi x^i$ are new (they vanish as $H\to 0$),
+      generating the additional $+H\phi x^i\partial_i\phi$ term in $\delta\phi$.
+\end{itemize}
+Structurally, \eq{eq:temporal-killing} is the standard de Sitter boost Killing vector in $dS_5$
+with $x^1 \leftrightarrow \phi$.  This is expected: $dS_5$ treats all four spatial directions
+$(x^1, x^2, x^3, \phi)$ symmetrically, so the $M^{0\phi}$ Killing vector is the $dS_5$ boost in
+the $\phi$ direction, of the same form as the de Sitter boost in any of the $x^i$ directions.
+
+\subsection{Cross-check: direct integration of the Killing equations}
+\label{subsec:temporal-crosscheck}
+
+The temporal Killing vector \eq{eq:temporal-killing} can be verified independently by solving
+the intrinsic Killing equations \eq{eq:killing-eqs} directly, without invoking the
+$\mathbb{R}^{1,5}$ embedding of \S\ref{subsec:temporal-boost}.
+
+\paragraph{Ansatz.}
+Take $K^0=\phi$, motivated by two facts: it trivially satisfies \eq{eq:k1} (which only
+requires $K^0$ to be $t$-independent), and it matches the flat-space $H\to0$ limit
+$K^0_{\rm flat}=\phi$.
+
+\paragraph{Solving for $K^\phi$.}
+Equation \eq{eq:k2} at $a=\phi$ gives $\partial_tK^\phi=e^{-2Ht}\partial_\phi K^0=e^{-2Ht}$,
+which integrates to
+\begin{equation}
+\label{eq:crosscheck-kphi-1}
+K^\phi = -\frac{1}{2H}e^{-2Ht}+C(\vec{x},\phi)
+\end{equation}
+for an integration ``constant'' $C$. Equation \eq{eq:k3} at $(a,b)=(\phi,\phi)$ gives
+$2\partial_\phi K^\phi=-2H\phi$, i.e.\ $\partial_\phi C=-H\phi$, so
+$C(\vec{x},\phi)=-\tfrac{H}{2}\phi^2+D(\vec{x})$.
+
+\paragraph{Solving for $K^i$.}
+Equation \eq{eq:k2} at $a=i$ gives $\partial_tK^i=e^{-2Ht}\partial_iK^0=0$, so
+$K^i=K^i(\vec{x},\phi)$. Equation \eq{eq:k3} at $(a,b)=(i,\phi)$ gives
+$\partial_iK^\phi+\partial_\phi K^i=0$, i.e.\ $\partial_\phi K^i=-\partial_iD(\vec{x})$. The
+ansatz $K^i=-H\phi\,x^i+E^i(\vec{x})$ solves this provided $\partial_iD=Hx^i$, which integrates
+to $D(\vec{x})=\tfrac{H}{2}\vec{x}^2+\text{const.}$ The remaining components of \eq{eq:k3}
+(diagonal $(i,i)$ and off-diagonal $(i,j)$, $i\neq j$) then require $E^i(\vec{x})$ itself to be
+a Killing vector of flat $3$-space, $E^i=c^i+\omega^{ij}x^j$ with $\omega^{ij}=-\omega^{ji}$ ---
+the residual freedom to add an unbroken $SO(3)$-rotation-plus-translation to the pure boost
+generator.
+
+\paragraph{Fixing the ambiguity.}
+Both $E^i$ and the additive constant in $D$ are $H$-independent, so a nonzero choice would
+survive undamped as $H\to0$. The pure flat-space $M^{0\phi}$ boost has $K^i=0$ and
+$K^\phi\to t$ exactly, with no residual rotation or translation piece; demanding this smooth
+limit fixes $E^i=0$ and the constant to zero.
+
+\paragraph{Result.}
+This independent integration reproduces \eq{eq:temporal-killing} exactly:
+\begin{equation}
+\label{eq:crosscheck-result}
+K^0=\phi \,\,, \qquad K^i=-H\phi\,x^i \,\,, \qquad
+K^\phi=\frac{1-e^{-2Ht}}{2H}+\frac{H}{2}\left(\vec{x}^2-\phi^2\right)
+=\frac{e^{-Ht}\sinh(Ht)}{H}+\frac{H}{2}\left(\vec{x}^2-\phi^2\right) \,\,,
+\end{equation}
+confirming \S\ref{subsec:temporal-boost} by a route that does not use the $6$D embedding.
+
+\end{document}

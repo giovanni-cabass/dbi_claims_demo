@@ -1,0 +1,148 @@
+"🚀 Script: ""01_static_gauge_formula_and_pullback_check"".wl"
+"📅 Started: ""Sunday November 08, 2026 00:56:36"
+"=== PART 1a: candidate O(eps) inverse composes to the identity, residual: \
+==="
+{0, 0, 0, 0}
+""
+"=== PART 1b: symbolic O(eps) coefficient of tildephi(tildex)-phi(tildex) \
+==="
+"Extracted: "KphiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+    phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]] - 
+   K3F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588] - K2F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588] - K1F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588] - K0F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588]
+"General formula K^phi - K^mu partial_mu phi: "
+  KphiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+    phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]] - 
+   K3F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588] - K2F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588] - K1F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588] - K0F$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588, 
+     phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]]*
+    Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588]
+"Zeroth-order check (expect 0): "0
+"Residual (expect 0): "0
+"PART 1 symbolic PASS: "True
+""
+"=== PART 1c: independent numeric finite-difference cross-check ==="
+"eps values: "{1/1000, 1/10000, 1/100000, 1/1000000}
+"|finite-diff - analytic| at each eps: "
+  {0.001246351902867815, 0.000124593818113361, 0.000012458973370321758, 
+   1.2459095595218628*^-6}
+"Linear-convergence ratios (expect ~10 each): "
+  {10.003320563896905, 10.000327828788299, 9.999901899061665}
+"PART 1 numeric PASS: "True
+""
+"=== PART 2: substitute the three Killing vectors into the general formula \
+==="
+"Spatial M^{1 phi}: delta phi = "
+  -x1S$23588 - phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]*
+    Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588]
+"  residual vs. note's eq:delta-phi-spatial (expect 0): "0
+"Temporal M^{0 phi}: delta phi = "
+  (1 - E^(-2*HS$23588*tS$23588) + 
+      HS$23588^2*(x1S$23588^2 + x2S$23588^2 + x3S$23588^2))/(2*HS$23588) - 
+   (HS$23588*phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]^2)/2 + 
+   phiF$23588[tS$23588, x1S$23588, x2S$23588, x3S$23588]*
+    (HS$23588*x3S$23588*Derivative[0, 0, 0, 1][phiF$23588][tS$23588, 
+        x1S$23588, x2S$23588, x3S$23588] + 
+      HS$23588*x2S$23588*Derivative[0, 0, 1, 0][phiF$23588][tS$23588, 
+        x1S$23588, x2S$23588, x3S$23588] + 
+      HS$23588*x1S$23588*Derivative[0, 1, 0, 0][phiF$23588][tS$23588, 
+        x1S$23588, x2S$23588, x3S$23588] - 
+      Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+       x3S$23588])
+"  residual vs. note's eq:delta-phi-temporal (expect 0): "0
+"Flat M^{mu 5} (general b^mu): delta phi = "
+  b0S$23588*tS$23588 - b1S$23588*x1S$23588 - b2S$23588*x2S$23588 - 
+   b3S$23588*x3S$23588 - phiF$23588[tS$23588, x1S$23588, x2S$23588, 
+     x3S$23588]*(b3S$23588*Derivative[0, 0, 0, 1][phiF$23588][tS$23588, 
+        x1S$23588, x2S$23588, x3S$23588] + 
+      b2S$23588*Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, 
+        x2S$23588, x3S$23588] + 
+      b1S$23588*Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+        x2S$23588, x3S$23588] + 
+      b0S$23588*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+        x2S$23588, x3S$23588])
+"  residual vs. note's eq:flat-dbi-boost (expect 0): "0
+"PART 2 PASS: "True
+""
+"=== PART 3a: induced metric pullback, symbolic (generic phi, generic a(t)) \
+==="
+"tilde g_{mu nu}: "{{-1 + aFunc$23588[tS$23588]^2*
+      Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+        x3S$23588]^2, aFunc$23588[tS$23588]^2*
+     Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588]}, {aFunc$23588[tS$23588]^2*
+     Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     (1 + Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+         x2S$23588, x3S$23588]^2), 
+    aFunc$23588[tS$23588]^2*Derivative[0, 0, 1, 0][phiF$23588][tS$23588, 
+      x1S$23588, x2S$23588, x3S$23588]*
+     Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588], aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588]}, {aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     (1 + Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, 
+         x2S$23588, x3S$23588]^2), 
+    aFunc$23588[tS$23588]^2*Derivative[0, 0, 0, 1][phiF$23588][tS$23588, 
+      x1S$23588, x2S$23588, x3S$23588]*
+     Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]}, {aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[1, 0, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[0, 1, 0, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+      x3S$23588]*Derivative[0, 0, 1, 0][phiF$23588][tS$23588, x1S$23588, 
+      x2S$23588, x3S$23588], aFunc$23588[tS$23588]^2*
+     (1 + Derivative[0, 0, 0, 1][phiF$23588][tS$23588, x1S$23588, x2S$23588, 
+         x3S$23588]^2)}}
+"Residual vs. g^dS_{mu nu} + a^2 partial_mu phi partial_nu phi (expect all \
+0): "{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}
+"PART 3 symbolic PASS: "True
+""
+"=== PART 3b: numeric spot-check (concrete a(t), phi(x), random point) ==="
+"Max |residual|: "0.
+"PART 3 numeric PASS: "True
+""
+"Saved to: ""mathematica\
+_outputs/01_static_gauge_formula_and_pullback_check.m"
+"TeX snippet saved to: ""mathematica_outputs/01_static_gauge_formula_and_pullback_check.tex"
+"🏁 Execution finished."
