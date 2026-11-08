@@ -1,6 +1,6 @@
 """check_claims.py -- the ledger checker and the fold command.
 
-The book is ``latex_notes/structure/claims.json`` (law: ``.cursor/rules/established-results.mdc``).
+The book is ``latex_notes/structure/claims.json`` (law: ``latex_notes/structure/established-results.md``).
 This script is the only thing that writes to it, and only under ``--write``.
 
 Modes (all paths in entries are relative to ``--root``, default the workspace):
