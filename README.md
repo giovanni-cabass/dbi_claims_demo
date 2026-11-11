@@ -1,5 +1,11 @@
 # DBI Cosmological Collider
 
+[![CI](https://github.com/giovanni-cabass/dbi_claims_demo/actions/workflows/ci.yml/badge.svg)](https://github.com/giovanni-cabass/dbi_claims_demo/actions/workflows/ci.yml)
+
+*This demo repository — the excerpt, packaging, and tooling you're looking at — was put
+together with Claude Code. [`METHODOLOGY.md`](METHODOLOGY.md) covers how the underlying
+research itself is produced.*
+
 This repository is a small, self-contained excerpt from Giovanni Cabass's ongoing research
 project on inflationary cosmology — constructing the **DBI Cosmological Collider**, the coupled
 Goldstone-plus-spinning-field system that imposes the DBI boost symmetry consistently in a

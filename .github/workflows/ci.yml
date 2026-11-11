@@ -3,10 +3,15 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check-claims:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -16,3 +21,5 @@ jobs:
         run: python python_scripts/check_claims.py
       - name: Regenerate views
         run: python python_scripts/generate_views.py
+      - name: Fail if regenerated views drifted from what's committed
+        run: git diff --exit-code -- latex_notes/structure/dependency_graph.md latex_notes/structure/claim_dashboard.html
