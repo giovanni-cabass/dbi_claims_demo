@@ -6,6 +6,8 @@
 together with Claude Code. [`METHODOLOGY.md`](METHODOLOGY.md) covers how the underlying
 research itself is produced.*
 
+(Earlier commits were missing the git trailer so GitHub never recognized Claude Code as co-author.)
+
 This repository is a small, self-contained excerpt from Giovanni Cabass's ongoing research
 project on inflationary cosmology — constructing the **DBI Cosmological Collider**, the coupled
 Goldstone-plus-spinning-field system that imposes the DBI boost symmetry consistently in a
